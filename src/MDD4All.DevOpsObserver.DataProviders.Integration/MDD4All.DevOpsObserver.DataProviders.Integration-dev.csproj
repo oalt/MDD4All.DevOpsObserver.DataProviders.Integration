@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\MDD4All.DevOpsObserver.DataProviders.Bitbucket\src\MDD4All.DevOpsObserver.DataProviders.Bitbucket\MDD4All.DevOpsObserver.DataProviders.Bitbucket-dev.csproj" />
+    <ProjectReference Include="..\..\..\MDD4All.DevOpsObserver.DataProviders.Github\src\MDD4All.DevOpsObserver.DataProviders.Github\MDD4All.DevOpsObserver.DataProviders.Github-dev.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using MDD4All.DevOpsObserver.DataModels;
 using MDD4All.DevOpsObserver.DataProviders.Bitbucket;
 using MDD4All.DevOpsObserver.DataProviders.Contracts;
+using MDD4All.DevOpsObserver.DataProviders.Github;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -12,9 +13,12 @@ namespace MDD4All.DevOpsObserver.DataProviders.Integration
     {
         private BitbucketStatusProvider _bitbucketStatusProvider;
 
+        private GithubStatusProvider _githubStatusProvider;
+
         public IntegrationStatusProvider(IConfiguration configuration, HttpClient httpClient)
         {
             _bitbucketStatusProvider = new BitbucketStatusProvider(configuration, httpClient);
+            _githubStatusProvider = new GithubStatusProvider(configuration, httpClient);
         }
 
 
@@ -24,7 +28,11 @@ namespace MDD4All.DevOpsObserver.DataProviders.Integration
 
             if (devOpsSystem.SystemType == DevOpsSystemType.BitBucketCloud)
             {
-                result = await _bitbucketStatusProvider.GetDevOpsStatusListAsync(devOpsSystem); 
+                result = await _bitbucketStatusProvider.GetDevOpsStatusListAsync(devOpsSystem);
+            }
+            else if (devOpsSystem.SystemType == DevOpsSystemType.Github)
+            {
+                result = await _githubStatusProvider.GetDevOpsStatusListAsync(devOpsSystem);
             }
 
             return result;
